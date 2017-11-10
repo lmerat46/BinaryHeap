@@ -37,8 +37,6 @@ class TBDQueue<E extends Comparable<E>> extends AbstractQueue<E> implements Queu
         affiche();
         list.get(parcours)[ind] = e;
         while(parcours >= 1 && list.get(parcours)[ind].compareTo(list.get(parcours-1)[pere]) < 0){
-            System.out.println("parcours:  "+parcours);
-            System.out.println("pere:  "+pere+"   ind:  "+ind);
             E tmp = list.get(parcours)[ind];
             list.get(parcours)[ind] = list.get(parcours-1)[plusPetitPere(parcours-1, pere)];
             list.get(parcours-1)[plusPetitPere(parcours-1, pere)] = tmp;
@@ -46,8 +44,6 @@ class TBDQueue<E extends Comparable<E>> extends AbstractQueue<E> implements Queu
             pere = pere/2;
             parcours --;   
         }
-        System.out.println("parcoursFin:  "+parcours);
-        System.out.println("pereFin:  "+pere+"   indFin:  "+ind);
 
     }
 
@@ -67,8 +63,7 @@ class TBDQueue<E extends Comparable<E>> extends AbstractQueue<E> implements Queu
             int length = list.get(list.size()-1).length;
             for(int i = 0; i < length; i++){
                 if(list.get(list.size()-1)[i] == null){
-                    //list.get(list.size()-1)[i] = e;
-                    entasser(e, i, i/2);   // WTF                 
+                    entasser(e, i, i/2);                
                     return true;
                 }
             }
