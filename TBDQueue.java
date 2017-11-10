@@ -94,7 +94,13 @@ class TBDQueue<E extends Comparable<E>> extends AbstractQueue<E> implements Queu
     }
 
     public int size(){
-        return 0;
+        int cmp = 0;
+        for(E[] e: this.list){
+            for(int i = 0; i < e.length; i++){
+                if(e[i] != null) cmp++;
+            }
+        }
+        return cmp;
     }
 
     public Iterator<E> iterator(){
@@ -102,7 +108,7 @@ class TBDQueue<E extends Comparable<E>> extends AbstractQueue<E> implements Queu
     }
 
     public void affiche(){
-        for(E[] e: list){
+        for(E[] e: this.list){
             for(int i = 0; i < e.length; i++){
                 System.out.print(e[i]+"  ");
             }
@@ -111,19 +117,42 @@ class TBDQueue<E extends Comparable<E>> extends AbstractQueue<E> implements Queu
     }
 
     public QueueExt<E> filtre(Predicate<E> p){
-        return null;
+        TBDQueue<E> res = new TBDQueue();
+        for(E[] e: this.list){
+            for(int i = 0; i < e.length; i++){
+                if(p.test(e[i])) res.add(e[i]);
+            }
+        }
+        return res;
     }
 
     public <T extends Comparable <T>> QueueExt<T> map(Function<E,T> f){
-        return null;
+        QueueExt<T> res = new TBDQueue();
+        for(E[] e: this.list){
+            for(int i = 0; i < e.length; i++){
+                res.add(f.apply(e[i]));
+            }
+        }
+        return res;
     }
 
     public Optional<E> trouve(Predicate<E> p){
-        return null;
+        for(E[] e: this.list){
+            for(int i = 0; i < e.length; i++){
+                if(p.test(e[i])) return Optional.of(e[i]);
+            }
+        }
+        return Optional.empty();
     }
 
     public <T> T reduit(T t, BiFunction<T,E,T> f){
-        return null;
+        T res = t;
+        for(E[] e: this.list){
+            for(int i = 0; i < e.length; i++){
+                res = f.apply(res,e[i]);
+            }
+        }
+        return res;
     }
 
 }

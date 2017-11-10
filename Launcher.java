@@ -21,5 +21,6 @@ class Launcher<E extends Comparable<E>>{
         //test.offer("a");
         System.out.println();
         test.affiche();
+        System.out.println("taille de test: "+test.size());
     }
 }
