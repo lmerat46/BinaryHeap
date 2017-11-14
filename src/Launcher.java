@@ -1,9 +1,11 @@
+package src;
+
 class Launcher<E extends Comparable<E>>{
 
     public static void main(String [] args){
         /*
         String tab[] = {"","lundi", "mardi", "mercredi", "jeudi", "vendredi"};
-        TBQueue test = new TBQueue(9, tab);
+        src.TBQueue test = new src.TBQueue(9, tab);
         System.out.println();
         test.offer("dimanche");
         test.offer("marmoulade");

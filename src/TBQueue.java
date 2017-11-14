@@ -1,7 +1,7 @@
+package src;
+
 import java.util.*;
 import java.lang.Comparable;
-import java.util.Collection;
-import java.lang.Iterable;
 import java.util.function.*;
 
 public class TBQueue<E extends Comparable <E>> extends AbstractQueue<E> implements QueueExt<E>{

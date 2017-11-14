@@ -1,7 +1,7 @@
+package src;
+
 import java.util.*;
 import java.lang.Comparable;
-import java.util.Collection;
-import java.lang.Iterable;
 import java.util.function.*;
 import java.util.LinkedList;
 
