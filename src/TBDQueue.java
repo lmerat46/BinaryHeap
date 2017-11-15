@@ -167,4 +167,21 @@ class TBDQueue<E extends Comparable<E>> extends AbstractQueue<E> implements Queu
         }
         return res;
     }
+
+    public static void main (String[] args){
+        TBDQueue<Integer> t = new TBDQueue<Integer>();
+        for(int i = 1; i < 20;i++){
+            t.offer(new Integer(i));
+        }
+        t.offer(new Integer(0));
+        t.affiche();
+        QueueExt<Integer> e = t.filtre((Integer x) -> x.intValue() > 2);
+        QueueExt<Integer> z = (t.filtre((Integer x) -> x.intValue() > 10)).map(x -> x.intValue() + 1);
+        for (Integer i : z) {
+            System.out.println(i);
+        }
+    }
+
+
+
 }
