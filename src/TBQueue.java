@@ -136,16 +136,4 @@ public class TBQueue<E extends Comparable<E>> extends AbstractQueue<E> implement
         };
         return it;
     }
-
-    public static void main(String [] args) {
-        TBQueue<Integer> t = new TBQueue<Integer>(30);
-        for (int i = 0; i < 20; i++) {
-            t.offer(new Integer(i));
-        }
-        QueueExt<Integer> e = t.filtre((Integer x) -> x.intValue() > 2);
-        QueueExt<Integer> z = (t.filtre((Integer x) -> x.intValue() > 10)).map(x -> x.intValue() + 1);
-        for (Integer i : z) {
-            System.out.println(i);
-        }
-    }
 }

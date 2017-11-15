@@ -15,7 +15,7 @@ class TBDQueue<E extends Comparable<E>> extends AbstractQueue<E> implements Queu
     }
 
     public boolean isFull(){
-        for(E[] e: list){
+        for(E[] e: this.list){
             for(int i = 0; i < e.length; i++){
                 if(e[i] == null) return false;
             }
@@ -34,7 +34,6 @@ class TBDQueue<E extends Comparable<E>> extends AbstractQueue<E> implements Queu
 
     public void entasser(E e, int ind, int pere){
         int parcours =list.size()-1;
-        affiche();
         list.get(parcours)[ind] = e;
         while(parcours >= 1 && list.get(parcours)[ind].compareTo(list.get(parcours-1)[pere]) < 0){
             E tmp = list.get(parcours)[ind];
@@ -115,11 +114,13 @@ class TBDQueue<E extends Comparable<E>> extends AbstractQueue<E> implements Queu
 
             @Override
             public E next() {
+                E e = list.get(empla)[decompte];
+                decompte++;
                 if(decompte >= list.get(empla).length){
-                    empla++;
                     decompte = 0;
+                    empla++;
                 }
-                return list.get(empla)[decompte++];
+                    return e;
             }
 
             @Override
@@ -138,54 +139,32 @@ class TBDQueue<E extends Comparable<E>> extends AbstractQueue<E> implements Queu
 
     public QueueExt<E> filtre(Predicate<E> p){
         TBDQueue<E> res = new TBDQueue();
-        for(E[] e: this.list){
-            for(int i = 0; i < e.length; i++){
-                if(p.test(e[i])) res.add(e[i]);
-            }
+        for(E e: this){
+            if(p.test(e)) res.add(e);
         }
         return res;
     }
 
     public <T extends Comparable <T>> QueueExt<T> map(Function<E,T> f){
         QueueExt<T> res = new TBDQueue();
-        for(E[] e: this.list){
-            for(int i = 0; i < e.length; i++){
-                res.add(f.apply(e[i]));
-            }
+        for(E e: this){
+            res.add(f.apply(e));
         }
         return res;
     }
 
     public Optional<E> trouve(Predicate<E> p){
-        for(E[] e: this.list){
-            for(int i = 0; i < e.length; i++){
-                if(p.test(e[i])) return Optional.of(e[i]);
-            }
+        for(E e: this){
+            if(p.test(e)) return Optional.of(e);
         }
         return Optional.empty();
     }
 
     public <T> T reduit(T t, BiFunction<T,E,T> f){
         T res = t;
-        for(E[] e: this.list){
-            for(int i = 0; i < e.length; i++){
-                res = f.apply(res,e[i]);
-            }
+        for(E e: this){
+            res = f.apply(res,e);
         }
         return res;
     }
-
-    public static void main (String[] args){
-        TBDQueue<Integer> t = new TBDQueue<Integer>();
-        for(int i = 1; i < 20;i++){
-            t.offer(new Integer(i));
-        }
-        t.offer(new Integer(0));
-        t.affiche();
-        /*for(Integer i : t){
-            System.out.println(i);
-        }*/
-    }
-
-
 }

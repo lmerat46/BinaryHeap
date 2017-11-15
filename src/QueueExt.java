@@ -14,5 +14,6 @@ interface QueueExt<E> extends Queue<E>{
     E poll();
     int size();
     Iterator<E> iterator();
+    void affiche();
 
 }
