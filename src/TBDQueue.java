@@ -6,7 +6,7 @@ import java.util.function.*;
 import java.util.LinkedList;
 
 
-class TBDQueue<E extends Comparable<E>> extends AbstractQueue<E> implements QueueExt<E>{
+class TBDQueue<E extends Comparable<E>> extends AbstractQueue<E> implements QueueExt<E>,Iterable<E>{
 
     LinkedList<E[]> list;
 
@@ -104,15 +104,35 @@ class TBDQueue<E extends Comparable<E>> extends AbstractQueue<E> implements Queu
     }
 
     public Iterator<E> iterator(){
-        return new IteratorTBD<E>(0, this.list);
+
+        Iterator<E> it = new Iterator<E>() {
+            int decompte = 0;
+            int empla = 0;
+            @Override
+            public boolean hasNext() {
+                return empla < list.size() && decompte < list.get(empla).length && list.get(empla)[decompte] != null;
+            }
+
+            @Override
+            public E next() {
+                if(decompte >= list.get(empla).length){
+                    empla++;
+                    decompte = 0;
+                }
+                return list.get(empla)[decompte++];
+            }
+
+            @Override
+            public void remove() {
+                throw new UnsupportedOperationException();
+            }
+        };
+        return it;
     }
 
     public void affiche(){
-        for(E[] e: this.list){
-            for(int i = 0; i < e.length; i++){
-                System.out.print(e[i]+"  ");
-            }
-            System.out.println();
+        for(E e: this){
+            System.out.println(e);
         }
     }
 
@@ -154,5 +174,18 @@ class TBDQueue<E extends Comparable<E>> extends AbstractQueue<E> implements Queu
         }
         return res;
     }
+
+    public static void main (String[] args){
+        TBDQueue<Integer> t = new TBDQueue<Integer>();
+        for(int i = 1; i < 20;i++){
+            t.offer(new Integer(i));
+        }
+        t.offer(new Integer(0));
+        t.affiche();
+        /*for(Integer i : t){
+            System.out.println(i);
+        }*/
+    }
+
 
 }
