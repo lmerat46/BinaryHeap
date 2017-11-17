@@ -1,6 +1,7 @@
 package src;
 
 import java.util.*;
+import java.util.function.*;
 import java.security.*;
 
 
@@ -18,14 +19,14 @@ class Launcher<E extends Comparable<E>>{
                     view = (TBQueue)view.map(x -> x.intValue() + 1);
                     break;
                 case 1:
-                    view = (TBQueue)view.filtre(x -> x.intValue() > 2);
+                    view = (TBQueue)view.filtre(x -> x.intValue() > 100);
                     break;
                 case 2:
                     o = view.trouve(x -> x.intValue() == 5);
                     break;
                 case 3:
-                    System.out.println("Reduit");
-
+                    int res = view.reduit(0, (a,x)-> a + x);
+                    System.out.println("Reduit de view: "+res);
                     break;
                 case 4:
                     System.out.println("Size de q: "+view.size());
@@ -58,8 +59,8 @@ class Launcher<E extends Comparable<E>>{
                     o = view.trouve(x -> x.intValue() == 5);
                     break;
                 case 3:
-                    System.out.println("Reduit");
-
+                    int res = view.reduit(0, (a,x)-> a + x);
+                    System.out.println("Reduit de view: "+res);
                     break;
                 case 4:
                     System.out.println("Size de q: "+view.size());
@@ -92,8 +93,8 @@ class Launcher<E extends Comparable<E>>{
                     o = view.trouve(x -> x.intValue() == 5);
                     break;
                 case 3:
-                    System.out.println("Reduit");
-
+                    int res = view.reduit(0, (a,x)-> a + x);
+                    System.out.println("Reduit de view: "+res);
                     break;
                 case 4:
                     System.out.println("Size de q: "+view.size());
@@ -122,8 +123,8 @@ class Launcher<E extends Comparable<E>>{
                     o = view.trouve(x -> x.intValue() == 5);
                     break;
                 case 3:
-                    System.out.println("Reduit");
-
+                    int res = view.reduit(0, (a,x)-> a + x);
+                    System.out.println("Reduit de view: "+res);
                     break;
                 case 4:
                     System.out.println("Size de q: "+view.size());
@@ -152,8 +153,8 @@ class Launcher<E extends Comparable<E>>{
                     o = view.trouve(x -> x.intValue() == 5);
                     break;
                 case 3:
-                    System.out.println("Reduit");
-
+                    int res = view.reduit(0, (a,x)-> a + x);
+                    System.out.println("Reduit de view: "+res);
                     break;
                 case 4:
                     System.out.println("Size de q: "+view.size());
@@ -189,8 +190,8 @@ class Launcher<E extends Comparable<E>>{
         System.out.println("taille de test: "+test.size());
         */
         LinkedList list = new LinkedList<Integer>();
-        Queue<Integer> q = new TBQueue<Integer>(10);
-        for(int i = 0; i < 10; i++){
+        Queue<Integer> q = new TBQueue<Integer>(1000);
+        for(int i = 0; i < 1000; i++){
             q.offer(i);
         }
         /*for(Integer i: q){
